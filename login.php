@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    if (empty($username) && empty($password)) {
+    if (!empty($username) && !empty($password)) {
       // Encrypting password with SHA-256
       $hashedPassword = hash('sha256', $password);
       // Creating user string
