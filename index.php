@@ -14,7 +14,7 @@
       <h1>Ingrese los siguientes datos:</h1>
       <div>
         <label for="email">Usuario:</label>
-        <input type="email" name="email" id="email">
+        <input type="text" name="username" id="username">
       </div>
       <div>
         <label for="password">Contraseña:</label>
