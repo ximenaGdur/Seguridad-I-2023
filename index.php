@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head></head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://www.phptutorial.net/app/css/style.css">
@@ -10,7 +10,7 @@
 
 <body>
   <main>
-    <form action="register.php" method="post">
+    <form action="login.php" method="post">
       <h1>Ingrese los siguientes datos:</h1>
       <div>
         <label for="email">Usuario:</label>
