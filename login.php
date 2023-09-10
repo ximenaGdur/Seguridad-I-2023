@@ -4,13 +4,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    // Encrypting password with SHA-256
-    $hashedPassword = hash('sha256', $password);
-    // Creating user string
-    $userString = $username . ',' . $hashedPassword;
+    if (empty($username) && empty($password)) {
+      // Encrypting password with SHA-256
+      $hashedPassword = hash('sha256', $password);
+      // Creating user string
+      $userString = $username . ',' . $hashedPassword;
 
-    // Saving to csv file
-    saveCSV('users.csv', $userString);
+      // Saving to csv file
+      saveCSV('users.csv', $userString);
+    }
 }
 
 function saveCSV($fileName, $data){
@@ -20,7 +22,7 @@ function saveCSV($fileName, $data){
     }
     // Write the user data to the CSV file
     if (fwrite($file, $data . "\n") === false) {
-      die('Could not write to the CSV file.');
+      die('No se puede abrir el archivo.');
     }
 
     fclose($file);
