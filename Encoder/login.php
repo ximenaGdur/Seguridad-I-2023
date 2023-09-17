@@ -26,7 +26,8 @@ function saveCSV($fileName, $data){
     }
 
     fclose($file);
-    echo 'Los datos se han guardado correctamente en ' . $fileName;
+    echo '<h4>Los datos se han guardado correctamente en ' . $fileName . '</h4>';
+    echo '<button onclick="window.location.href=\'index.php\';">Atrás</button>';
 }
 
 ?>
