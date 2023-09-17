@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function readPasswords($fileName) {
-  $encriptedPasswords = array();
+  $passwords = array();
   
   // Comprobar si el archivo existe
   if (!file_exists($fileName)) {
@@ -28,14 +28,14 @@ function readPasswords($fileName) {
   // Itera por todas las líneas del archivo
   while (($linea = fgets($file)) !== false) {
       // Agrega al arreglo la palabra
-      array_push($passwords, $encriptedPasswords);
+      array_push($passwords, $linea);
       echo $linea;
   }
 
   // Cierra el archivo TXT
   fclose($file);
 
-  return $encriptedPasswords;
+  return $passwords;
 }
 
 function readUsers($fileName) {
