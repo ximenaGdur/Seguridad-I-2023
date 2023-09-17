@@ -30,7 +30,7 @@ function readPasswords($fileName) {
   while (($linea = fgets($file)) !== false) {
       // Agrega al arreglo la palabra
       array_push($passwords, $linea);
-      echo $linea . '</br>';
+      echo '[' . $linea . ']</br>';
   }
 
   // Cierra el archivo TXT
@@ -55,7 +55,7 @@ function readUsers($fileName) {
               $username = $data[0];
               array_push($passwords, $data[1]);
 
-              echo 'Usuario: ' . $username . ', Contraseña: ' . $passwords . '<br>';
+              echo 'Usuario: [' . $username . '], Contraseña: [' . $data[1] . ']<br>';
           }
       }
       // Close the CSV file
@@ -76,7 +76,7 @@ function comparingPasswords($userPasswords, $existingPasswords) {
     // 1 word password
     foreach ($existingPasswords as $existingPassword1) {
       $hashedPassword = hash('sha256', $existingPassword1);
-      echo 'contraseña existente: ' . $existingPassword1 . 'con hash: ' . $hashedPassword . '<br>';
+      echo 'contraseña existente: [' . $existingPassword1 . '] con hash: ' . $hashedPassword . '<br>';
       if ($userPassword == $hashedPassword) {
         $passwordFound = true;
         break;
@@ -85,7 +85,7 @@ function comparingPasswords($userPasswords, $existingPasswords) {
         foreach ($existingPasswords as $existingPassword2) {
           $combinedPassword1 = $existingPassword1 . $existingPassword2;
           $hashedPassword2 = hash('sha256', $combinedPassword1);
-          echo 'contraseña existente: ' . $combinedPassword1 . 'con hash: ' . $hashedPassword2 . '<br>';
+          echo 'contraseña existente: [' . $combinedPassword1 . '] con hash: ' . $hashedPassword2 . '<br>';
           if ($userPassword == $hashedPassword2) {
             $passwordFound = true;
             break 2;
@@ -94,7 +94,7 @@ function comparingPasswords($userPasswords, $existingPasswords) {
             foreach ($existingPasswords as $existingPassword3) {
               $combinedPassword2 = $existingPassword1 . $existingPassword2 . $existingPassword3;
               $hashedPassword3 = hash('sha256', $combinedPassword2);
-              echo 'contraseña existente: ' . $combinedPassword2 . 'con hash: ' . $hashedPassword3 . '<br>';
+              echo 'contraseña existente: [' . $combinedPassword2 . '] con hash: ' . $hashedPassword3 . '<br>';
               if ($userPassword == $hashedPassword3) {
                 $passwordFound = true;
                 break 3;
