@@ -1,45 +1,109 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo 'Probando...';
-    // Open the CSV file for reading
-    /*
-    $fileName = $_POST["fileName"];
-    $fileOpened = fopen($fileName, 'r');
-
-    // Check if the file was successfully opened
-    if ($fileOpened !== false) {
-        // Initialize an empty array to store the passwords
-        $passwords = [];
-
-        // Read each line of the CSV file
-        while (($data = fgetcsv($fileOpened)) !== false) {
-            if(count($data) >= 2){
-                $username = $data[0]
-                
-            }
-        }
-
-        // Close the CSV file
-        fclose($fileOpened);
-
-        // Display the CSV data
-        echo '<pre>';
-        print_r($csvData);
-        echo '</pre>';
-      */
+  // Reading existing passwords and encrypting
+  $existingPasswords = readPasswords('passwords.txt');
+  // Reading user's encrypted passwords
+  $userPasswords = readUsers('users.csv');
+  // Comparing passwords
+  comparingPasswords($userPasswords, $existingPasswords);
 }
 
-// function readTxt($txtFile){
-//     // Abre el archivo TXT
-//     $archivo = fopen($txtFile, "r");
-//     // Itera por todas las líneas del archivo
-//     foreach ($archivo as $linea) {
-//     // Imprime la línea del archivo
-//     echo $linea;
-//     }
-//     // Cierra el archivo TXT
-//     fclose($archivo);
-//}
+function readPasswords($fileName) {
+  $encriptedPasswords = array();
+  
+  // Abre el archivo TXT
+  $file = fopen($fileName, "r");
+  
+  // Comprobar si el archivo existe
+  if (!file_exists($file)) {
+      throw new Exception("El archivo no existe");
+  }
 
+  // Comprobar si el archivo se puede abrir
+  if (!is_readable($file)) {
+      throw new Exception("El archivo no se puede leer");
+  }
+  
+  // Itera por todas las líneas del archivo
+  while (($linea = fgets($file)) !== false) {
+      // Agrega al arreglo la palabra
+      array_push($passwords, $encriptedPasswords);
+      echo $linea;
+  }
+
+  // Cierra el archivo TXT
+  fclose($file);
+
+  return $encriptedPasswords;
+}
+
+function readUsers($fileName) {
+  // Open the CSV file for reading
+  $fileOpened = fopen($fileName, 'r');
+
+  // Check if the file was successfully opened
+  if ($fileOpened !== false) {
+      // Initialize an empty array to store the passwords
+      $passwords = array();
+
+      // Read each line of the CSV file
+      while (($data = fgetcsv($fileOpened)) !== false) {
+          if(count($data) >= 2){
+              $username = $data[0];
+              array_push($passwords, $data[1]);
+
+              echo 'Usuario: $username, Contraseña: $passwords<br>';
+          }
+      }
+      // Close the CSV file
+      fclose($fileOpened);
+    } else {
+        echo 'Arhivo no se ha podido abrir';
+    }
+    return $passwords;
+}
+
+function comparingPasswords($userPasswords, $existingPasswords) {
+  // Iterating through user passwords
+  foreach ($userPasswords as &$userPassword) {
+    // Flag to check if the password was found
+    $passwordFound = false;
+
+    // 1 word password
+    foreach ($existingPasswords as $existingPassword1) {
+      $hashedPassword = hash('sha256', $existingPassword1);
+      if ($userPassword == $hashedPassword) {
+        $passwordFound = true;
+        break;
+      } else {
+        // 2 word password
+        foreach ($existingPasswords as $existingPassword2) {
+          $combinedPassword1 = $existingPassword1 . $existingPassword2;
+          $hashedPassword2 = hash('sha256', $combinedPassword1);
+          if ($userPassword == $hashedPassword2) {
+            $passwordFound = true;
+            break 2;
+          } else {
+            // 3 word password
+            foreach ($existingPasswords as $existingPassword3) {
+              $combinedPassword2 = $existingPassword1 . $existingPassword2 . $existingPassword3;
+              $hashedPassword3 = hash('sha256', $combinedPassword2);
+              if ($userPassword == $hashedPassword3) {
+                $passwordFound = true;
+                break 3;
+              }
+            }
+          }
+        }
+      }
+    }
+    // Check the flag after the inner loop
+    if ($passwordFound) {
+      echo 'EXITO';
+    } else {
+      echo 'FALLO';
+    }
+  }
+}
 ?>

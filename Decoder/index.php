@@ -11,8 +11,8 @@
     <main>
       <form action="decoder.php" method="post">
         <h4>Haga click en el botón para correr el programa</h4>
-        <button type="submit">Comenzar</button>
         </br>
+        <button type="submit">Comenzar</button>
       </form>
     </main>
   </body>
