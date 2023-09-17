@@ -12,18 +12,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function readPasswords($fileName) {
   $encriptedPasswords = array();
   
-  // Abre el archivo TXT
-  $file = fopen($fileName, "r");
-  
   // Comprobar si el archivo existe
-  if (!file_exists($file)) {
+  if (!file_exists($fileName)) {
       throw new Exception("El archivo no existe");
   }
 
   // Comprobar si el archivo se puede abrir
-  if (!is_readable($file)) {
+  if (!is_readable($fileName)) {
       throw new Exception("El archivo no se puede leer");
   }
+
+  // Abre el archivo TXT
+  $file = fopen($fileName, "r");
   
   // Itera por todas las líneas del archivo
   while (($linea = fgets($file)) !== false) {
