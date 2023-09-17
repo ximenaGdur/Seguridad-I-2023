@@ -28,9 +28,9 @@ function readPasswords($fileName) {
   echo 'Imprimiendo contenidos de archivo txt </br>';
   // Itera por todas las líneas del archivo
   while (($linea = fgets($file)) !== false) {
-      // Agrega al arreglo la palabra
-      array_push($passwords, $linea);
-      echo '[' . $linea . ']</br>';
+      // Agrega al arreglo la palabras
+      array_push($passwords, trim($linea,"\n"));
+      echo '[' . trim($linea,"\n") . ']</br>';
   }
 
   // Cierra el archivo TXT
@@ -53,9 +53,9 @@ function readUsers($fileName) {
       while (($data = fgetcsv($fileOpened)) !== false) {
           if(count($data) >= 2){
               $username = $data[0];
-              array_push($passwords, $data[1]);
+              array_push($passwords, trim($data[1],"\n"));
 
-              echo 'Usuario: [' . $username . '], Contraseña: [' . $data[1] . ']<br>';
+              echo 'Usuario: [' . trim($username,"\n") . '], Contraseña: [' . trim($data[1],"\n") . ']<br>';
           }
       }
       // Close the CSV file
