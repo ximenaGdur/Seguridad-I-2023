@@ -2,7 +2,7 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Reading existing passwords and encrypting
-  $existingPasswords = readPasswords('passwords.txt');
+  $existingPasswords = readPasswords('passwordsShort.txt');
   // Reading user's encrypted passwords
   $userPasswords = readUsers('users.csv');
   // Comparing passwords
