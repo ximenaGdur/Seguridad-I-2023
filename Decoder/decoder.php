@@ -103,7 +103,7 @@ function comparingPasswords($userPasswords, $hashedExistingPasswords) {
     foreach ($hashedExistingPasswords as $hashedPassword) {
       // Check the flag after the inner loop
       if ($hashedPassword == $userPassword) {
-        echo 'EXITO:' + $hashedPassword + ' == ' + $userPassword + '<br>';
+        echo 'EXITO:' . $hashedPassword . ' == ' . $userPassword . '<br>';
       } else {
         echo 'FALLO<br>';
       }
