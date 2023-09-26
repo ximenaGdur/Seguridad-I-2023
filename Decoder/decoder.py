@@ -27,10 +27,9 @@ def read_users(file_name):
   return passwords
 
 def creating_hashes(existing_passwords,start, end, hashes_map):
- 
+
   for i in range(start, end):
     password1=existing_passwords[i]
-    print(i)
     hashed_password = sha256(password1.encode('utf-8')).hexdigest()
     hashes_map[password1] = hashed_password.strip()
     for j in range(len(existing_passwords)):
@@ -53,7 +52,9 @@ def comparing_passwords(user_passwords, hashed_passwords):
       if hashed_passwords[password] == user_passwords[username]:
         print(f'Success for {username} with password {password}:')
         print(f'{hashed_passwords[password]} == {user_passwords[username]}\n')
+
 def main():
+
   num_threads = 5
   existing_passwords = read_passwords('passwords.txt')
   batch_size = len(existing_passwords) // num_threads
@@ -74,6 +75,7 @@ def main():
   print("Fin") 
   hashed_passwords = creating_hashes(existing_passwords)
   comparing_passwords(user_passwords, hashed_passwords)
+
 
 if __name__ == '__main__':
   main()
